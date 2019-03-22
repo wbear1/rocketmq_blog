@@ -8,6 +8,7 @@
   - [消息存储CommitLog](https://github.com/wbear1/rocket_blog/remoting)
   - [消息元数据ConsumeQueue](https://github.com/wbear1/rocket_blog/remoting)
   - [简单文件Config](https://github.com/wbear1/rocket_blog/remoting)
+
 ####1、存储目录
 
 先来看看存储目录下具体有哪些文件，对RocketMQ的存储模块有个直观的认识。
