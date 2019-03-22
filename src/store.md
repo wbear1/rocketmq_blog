@@ -12,7 +12,7 @@
 ####1、存储目录
 
 先来看看存储目录下具体有哪些文件，对RocketMQ的存储模块有个直观的认识。
-![dir](https://github.com/wbear1/rocket_blog/img/store/dir.png)
+![dir](https://github.com/wbear1/rocketmq_blog/blob/master/img/store/dir.png)
 
 + commitlog  目录下存储了该broker接收的mq的消息，文件名按消息偏移量命名，文件内容按一定格式编码，详细编码后文介绍。如下所示：每个文件大小为1GB，00000000222264557568文件为第207个文件，00000000223338299392文件为第208个文件，前面的0~206个文件，因满足删除策略已被删除，关于删除策略在后文介绍。
 ![commitlog](https://github.com/wbear1/rocket_blog/img/store/commitlog.png)
