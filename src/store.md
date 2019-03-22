@@ -31,14 +31,15 @@
 #### 2、存储设计
 
 核心设计如下图所示   
-<div align=center>![arch](https://github.com/wbear1/rocketmq_blog/blob/master/img/store/arch.png)
+![arch](https://github.com/wbear1/rocketmq_blog/blob/master/img/store/arch.png)
 
 其中messageStore为存储模块对外提供的功能接口，DefaultMessageStore为RokcetMQ的默认实现。
 CommitLog、ConsumeQUeue、config、index、checkpoint为内部实现的几类存储。
 最下面的黑色虚框表示使用内存映射文件读写文件，MappedFileQueue表示对一个目录的读写，底层都是使用MappedFile对应一个实际物理文件，出于效率的考虑，设计了AllocateMappedFileService用于提前创建文件。
 
 MessageStore提供的主要方法：写消息、读消息、其中MessageExtBrokerInner为单条消息，MessageExtBatch为多条封装的批量消息
-```
+```java
+
 /**
  * Store a message into store.
  *
