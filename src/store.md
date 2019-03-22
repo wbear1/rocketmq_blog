@@ -80,7 +80,43 @@ GetMessageResult getMessage(final String group, final String topic, final int qu
 <a name="3.1"></a>
 ##### 内存映射文件MappedFile
 初始化MappedFile，主要是将文件映射到MappedByteBuffer，对文件的读写操作就变成对MappedByteBuffer的操作，关于文件的nio操作相关资料比较多，此处不展开。
-![MappedFile](https://github.com/wbear1/rocketmq_blog/blob/master/img/store/MappedFile.png)
+```java
+public void init(final String fileName, final int fileSize,
+    final TransientStorePool transientStorePool) throws IOException {
+    init(fileName, fileSize);
+    this.writeBuffer = transientStorePool.borrowBuffer(); //内容先commit到内存缓冲区，定时flush到disk
+    this.transientStorePool = transientStorePool;
+}
+
+private void init(final String fileName, final int fileSize) throws IOException {
+    this.fileName = fileName;
+    this.fileSize = fileSize;
+    this.file = new File(fileName);
+    this.fileFromOffset = Long.parseLong(this.file.getName());
+    boolean ok = false;
+
+    ensureDirOK(this.file.getParent());
+
+    try {
+        this.fileChannel = new RandomAccessFile(this.file, "rw").getChannel();
+        //将文件映射到MappedByteBuffer对象
+        this.mappedByteBuffer = this.fileChannel.map(MapMode.READ_WRITE, 0, fileSize);
+        TOTAL_MAPPED_VIRTUAL_MEMORY.addAndGet(fileSize);
+        TOTAL_MAPPED_FILES.incrementAndGet();
+        ok = true;
+    } catch (FileNotFoundException e) {
+        log.error("create file channel " + this.fileName + " Failed. ", e);
+        throw e;
+    } catch (IOException e) {
+        log.error("map file " + this.fileName + " Failed. ", e);
+        throw e;
+    } finally {
+        if (!ok && this.fileChannel != null) {
+            this.fileChannel.close();
+        }
+    }
+}
+```
 
 <a name="3.2"></a>
 ##### MappedFileQueue
