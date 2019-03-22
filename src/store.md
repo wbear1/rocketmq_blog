@@ -21,7 +21,8 @@
 ![consumequeue](https://github.com/wbear1/rocketmq_blog/blob/master/img/store/consumequeue.png)
 
 + conifg 目录下存储各种配置信息，包括：topic的配置、consumer提交的offset、consumerFilter的配置、subscriptionGroup的配置等等，文件内容为json字符串，因文件都比较小，对文件的读写直接通过inputstream和outputstream进行操作。
-![config](https://github.com/wbear1/rocketmq_blog/blob/master/img/store/config.png)
+![config1](https://github.com/wbear1/rocketmq_blog/blob/master/img/store/config1.png)
+![config2](https://github.com/wbear1/rocketmq_blog/blob/master/img/store/config2.png)
 
 * index 目录下存储了消息索引，用于快速查找消息
 * checkpoint文件
