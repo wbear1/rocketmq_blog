@@ -1,14 +1,15 @@
 # Store模块的设计与实现
 
-- [1、存储目录](https://github.com/wbear1/rocket_blog/hellword)
-- [2、存储设计](https://github.com/wbear1/rocket_blog/arch)
-- [3、存储实现](https://github.com/wbear1/rocket_blog/remoting)
-  - [内存映射文件MappedFile](https://github.com/wbear1/rocket_blog/remoting)
-  - [MappedFileQueue](https://github.com/wbear1/rocket_blog/remoting)
-  - [消息存储CommitLog](https://github.com/wbear1/rocket_blog/remoting)
-  - [消息元数据ConsumeQueue](https://github.com/wbear1/rocket_blog/remoting)
-  - [简单文件Config](https://github.com/wbear1/rocket_blog/remoting)
- 
+- [1、存储目录](#1)
+- [2、存储设计](#2)
+- [3、存储实现](#3)
+  - [内存映射文件MappedFile](#3.1)
+  - [MappedFileQueue](#3.2)
+  - [消息存储CommitLog](#3.3)
+  - [消息元数据ConsumeQueue](#3.4)
+  - [简单文件Config](#3.5)
+
+<a name="1"></a> 
 #### 1、存储目录
 
 先来看看存储目录下具体有哪些文件，对RocketMQ的存储模块有个直观的认识。
@@ -28,6 +29,7 @@
 * checkpoint文件
 * lock文件
 
+<a name="2"></a>
 #### 2、存储设计
 
 核心设计如下图所示   
@@ -71,17 +73,23 @@ PutMessageResult putMessages(final MessageExtBatch messageExtBatch);
 GetMessageResult getMessage(final String group, final String topic, final int queueId,
     final long offset, final int maxMsgNums, final MessageFilter messageFilter);
 ```
- 
+
+ <a name="3"></a>
 #### 3、存储实现
 
+<a name="3.1"></a>
 ##### 内存映射文件MappedFile
 初始化MappedFile，主要是将文件映射到MappedByteBuffer，对文件的读写操作就变成对MappedByteBuffer的操作，关于文件的nio操作相关资料比较多，此处不展开。
 ![MappedFile](https://github.com/wbear1/rocketmq_blog/blob/master/img/store/MappedFile.png)
 
+<a name="3.2"></a>
 ##### MappedFileQueue
 
+<a name="3.3"></a>
 ##### 消息存储CommitLog
 
+<a name="3.4"></a>
 ##### 消息元数据ConsumeQueue
 
+<a name="3.5"></a>
 ##### 简单文件Config
