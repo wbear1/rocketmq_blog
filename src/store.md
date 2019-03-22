@@ -8,7 +8,7 @@
   - [消息存储CommitLog](https://github.com/wbear1/rocket_blog/remoting)
   - [消息元数据ConsumeQueue](https://github.com/wbear1/rocket_blog/remoting)
   - [简单文件Config](https://github.com/wbear1/rocket_blog/remoting)
-  
+ 
 ####1、存储目录
 
 先来看看存储目录下具体有哪些文件，对RocketMQ的存储模块有个直观的认识。
@@ -39,9 +39,9 @@ CommitLog、ConsumeQUeue、config、index、checkpoint为内部实现的几类�
 
 MessageStore提供的主要方法：写消息、读消息、其中MessageExtBrokerInner为单条消息，MessageExtBatch为多条封装的批量消息
 ![MessageStore](https://github.com/wbear1/rocketmq_blog/blob/master/img/store/MessageStore.png)
-  
+ 
 ####3、存储实现
-  
+
 ##### 内存映射文件MappedFile
 初始化MappedFile，主要是将文件映射到MappedByteBuffer，对文件的读写操作就变成对MappedByteBuffer的操作，关于文件的nio操作相关资料比较多，此处不展开。
 ![MappedFile](https://github.com/wbear1/rocketmq_blog/blob/master/img/store/MappedFile.png)
