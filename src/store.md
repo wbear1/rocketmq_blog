@@ -31,14 +31,45 @@
 #### 2、存储设计
 
 核心设计如下图所示   
-![arch](https://github.com/wbear1/rocketmq_blog/blob/master/img/store/arch.png)
+<div align=center>![arch](https://github.com/wbear1/rocketmq_blog/blob/master/img/store/arch.png)
 
 其中messageStore为存储模块对外提供的功能接口，DefaultMessageStore为RokcetMQ的默认实现。
 CommitLog、ConsumeQUeue、config、index、checkpoint为内部实现的几类存储。
 最下面的黑色虚框表示使用内存映射文件读写文件，MappedFileQueue表示对一个目录的读写，底层都是使用MappedFile对应一个实际物理文件，出于效率的考虑，设计了AllocateMappedFileService用于提前创建文件。
 
 MessageStore提供的主要方法：写消息、读消息、其中MessageExtBrokerInner为单条消息，MessageExtBatch为多条封装的批量消息
-![MessageStore](https://github.com/wbear1/rocketmq_blog/blob/master/img/store/MessageStore.png)
+```
+/**
+ * Store a message into store.
+ *
+ * @param msg Message instance to store
+ * @return result of store operation.
+ */
+PutMessageResult putMessage(final MessageExtBrokerInner msg);
+
+/**
+ * Store a batch of messages.
+ *
+ * @param messageExtBatch Message batch.
+ * @return result of storing batch messages.
+ */
+PutMessageResult putMessages(final MessageExtBatch messageExtBatch);
+
+/**
+ * Query at most <code>maxMsgNums</code> messages belonging to <code>topic</code> at <code>queueId</code> starting
+ * from given <code>offset</code>. Resulting messages will further be screened using provided message filter.
+ *
+ * @param group Consumer group that launches this query.
+ * @param topic Topic to query.
+ * @param queueId Queue ID to query.
+ * @param offset Logical offset to start from.
+ * @param maxMsgNums Maximum count of messages to query.
+ * @param messageFilter Message filter used to screen desired messages.
+ * @return Matched messages.
+ */
+GetMessageResult getMessage(final String group, final String topic, final int queueId,
+    final long offset, final int maxMsgNums, final MessageFilter messageFilter);
+```
  
 #### 3、存储实现
 
