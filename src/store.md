@@ -30,7 +30,7 @@
 
 #### 2、存储设计
 
-核心设计如下图所示
+核心设计如下图所示   
 ![arch](https://github.com/wbear1/rocketmq_blog/blob/master/img/store/arch.png)
 
 其中messageStore为存储模块对外提供的功能接口，DefaultMessageStore为RokcetMQ的默认实现。
