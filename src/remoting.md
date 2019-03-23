@@ -66,7 +66,7 @@ public ByteBuffer encodeHeader(final int bodyLength) {
 
     // 2> header data length
     byte[] headerData;
-    headerData = this.headerEncode();
+    headerData = this.headerEncode(); //其实就是把CommandCustomHeader编码json字符串对应的字节数组
 
     length += headerData.length;
 
@@ -88,6 +88,27 @@ public ByteBuffer encodeHeader(final int bodyLength) {
     result.flip();
 
     return result;
+}
+
+private byte[] headerEncode() {
+    this.makeCustomHeaderToNet();
+    if (SerializeType.ROCKETMQ == serializeTypeCurrentRPC) {
+        return RocketMQSerializable.rocketMQProtocolEncode(this);
+    } else {
+        return RemotingSerializable.encode(this);
+    }
+}
+
+public abstract class RemotingSerializable {
+    private final static Charset CHARSET_UTF8 = Charset.forName("UTF-8");
+
+    public static byte[] encode(final Object obj) {
+        final String json = toJson(obj, false);
+        if (json != null) {
+            return json.getBytes(CHARSET_UTF8);
+        }
+        return null;
+    }
 }
 
 public static byte[] markProtocolType(int source, SerializeType type) {
