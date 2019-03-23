@@ -1,6 +1,6 @@
 # 该系列blog主要分析RocketMQ的设计与实现
 
-- [先来个HelloWorld](https://github.com/wbear1/rocket_blog/blob/master/src/hellword.md)
+- [先来个HelloWorld](https://github.com/wbear1/rocket_blog/blob/master/src/hellworld.md)
 - [架构设计](https://github.com/wbear1/rocket_blog/blob/master/src/arch.md)
 - [通信模块的设计与实现](https://github.com/wbear1/rocket_blog/blob/master/src/remoting.md)
 - [NameSvr模块的设计与实现](https://github.com/wbear1/rocket_blog/blob/master/src/namesvr.md)
