@@ -356,3 +356,10 @@ public class PushConsumer {
 
 <a name="3"></a>
 #### 3、一些概念
+
+上面的示例程序中，已经出现了一些RocketMQ的概念：
+
+* broker 消息队列服务端的简称
+* topic 相当于消息的分类，同一个topic的消息分布式地存储在不同的broker节点上
+* messageQueue 每个topic可以有多个messageQueue，可以理解为数据分区
+* offset 消息偏移量
