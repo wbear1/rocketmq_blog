@@ -1,6 +1,6 @@
 # 通信模块的设计与实现
 
-不论是broker与nameserver之间，还是broker与client之间，以及broker节点之间，都面临着远程通信的需要。因此，RocketMQ将通信模块独立抽出来作为一个独立的子模块，用于各节点之间的通信。相对于其它业务的rpc通信框架，该通信模块的设计与实现都比较简单。主要分为服务端、客户端和消息结构。
+不论是broker与nameserver之间，还是broker与client之间，以及broker节点之间，都面临着远程通信的需要。因此RocketMQ将通信模块独立抽出来作为一个独立的子模块，用于各节点之间的通信。相对于其它业务的rpc通信框架，该通信模块的设计与实现都比较简单。主要分为服务端、客户端和消息结构。
 
 - [1、通信消息RemotingCommand](#1)
 - [2、服务端RemotingServer](#2)
@@ -21,7 +21,8 @@ public class RemotingCommand {
     private HashMap<String, String> extFields;          //扩展字段，部分功能会使用到，如标识调用的region
     private transient CommandCustomHeader customHeader; //消息头部，大部分的rpc调用只有消息头部。
 
-    private SerializeType serializeTypeCurrentRPC = serializeTypeConfigInThisServer;    //消息header的序列化方法，支持json和自组装二进制，默认采用json
+    //消息header的序列化方法，支持json和自组装二进制，默认采用json
+    private SerializeType serializeTypeCurrentRPC = serializeTypeConfigInThisServer;
 
     private transient byte[] body;                      //消息体，比如producer发送的消息就是属于body
 }
