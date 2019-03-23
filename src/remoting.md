@@ -66,7 +66,7 @@ public ByteBuffer encodeHeader(final int bodyLength) {
 
     // 2> header data length
     byte[] headerData;
-    headerData = this.headerEncode(); //其实就是把CommandCustomHeader编码json字符串对应的字节数组
+    headerData = this.headerEncode(); //其实就是把CommandCustomHeader编码成json字符串对应的字节数组
 
     length += headerData.length;
 
