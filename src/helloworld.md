@@ -1,6 +1,6 @@
 # 先来个HelloWorld
 
-RocketMQ是一个开源的分布式消息队列中间件。官网介绍：https://rocketmq.apache.org/
+RocketMQ是一个开源的分布式消息队列中间件。官网介绍：https://rocketmq.apache.org/   
 依照惯例，先通过HelloWorld程序也简单了解下RocketMQ的基本用法和基本概念，在之后的文章再详细介绍HelloWorld程序背后的原理和实现。对于MQ而言，HelloWorld程序主要是消息发送方（provider）和消息接收方（consumer）的代码实现，在RocketMQ中，不论是provider还是consumer都支持多种模式，下面分别一一介绍。
 
 - [1、消息Provider](#1)
