@@ -118,7 +118,7 @@ public RemotingCommand processRequest(ChannelHandlerContext ctx,
 <a name="2"></a>
 #### 2、RouteInfoManager
 
-RouteInfoManager内部通过5个HashMap数据结构保存各类信息，然后通过ReetrantReadWriteLock来保证对map操作的安全性。
+RouteInfoManager内部通过5个HashMap数据结构保存各类信息，然后通过ReetrantReadWriteLock来保证对map操作的安全性。如果NameServer节点宕掉或者重启，则依赖于broker的上报来恢复这些信息。
 ```java
 public class RouteInfoManager {
     private static final InternalLogger log = InternalLoggerFactory.getLogger(LoggerName.NAMESRV_LOGGER_NAME);
@@ -139,7 +139,7 @@ public class RouteInfoManager {
     }
 }
 ```
-比如client在发送消息时，需要先获取topic的路由信息，则会发请求到NameServer:
+比如producer在发送消息时，需要先获取topic的路由信息，则会发请求到NameServer:
 ```java
 public TopicRouteData getTopicRouteInfoFromNameServer(final String topic, final long timeoutMillis,
     boolean allowTopicNotExist) throws MQClientException, InterruptedException, RemotingTimeoutException, RemotingSendRequestException, RemotingConnectException {

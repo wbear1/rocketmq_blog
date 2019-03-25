@@ -3,7 +3,7 @@
 - [先来个HelloWorld](https://github.com/wbear1/rocketmq_blog/blob/master/src/helloworld.md)
 - [架构设计](https://github.com/wbear1/rocketmq_blog/blob/master/src/arch.md)
 - [通信模块的设计与实现](https://github.com/wbear1/rocketmq_blog/blob/master/src/remoting.md)
-- [NameSvr模块的设计与实现](https://github.com/wbear1/rocketmq_blog/blob/master/src/namesvr.md)
+- [NameSvr模块的设计与实现](https://github.com/wbear1/rocketmq_blog/blob/master/src/nameserver.md)
 - [Store模块的设计与实现](https://github.com/wbear1/rocketmq_blog/blob/master/src/store.md)
 - [Broker与Client的设计与实现](https://github.com/wbear1/rocketmq_blog/blob/master/src/broker.md)
 - [几种特色功能的实现](https://github.com/wbear1/rocketmq_blog/blob/master/src/feature.md)
